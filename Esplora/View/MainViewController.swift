@@ -21,6 +21,7 @@ class MainViewController: UIViewController, StoryboardBased {
     @IBOutlet weak var txCountLabel: UILabel!
     @IBOutlet weak var recivedLabel: UILabel!
     @IBOutlet weak var unspentLabel: UILabel!
+    
     // MARK: - parameter:
     let searchViewcontroller = UISearchController(searchResultsController: nil)
 
@@ -81,7 +82,6 @@ class MainViewController: UIViewController, StoryboardBased {
 }
 
 // MARK: - SearchBar Delegate:
-
 extension MainViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let value = searchBar.text else { return }

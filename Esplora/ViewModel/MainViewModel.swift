@@ -15,7 +15,6 @@ class MainViewModel {
     var confrimedRecieved: DynamicValue<String> = DynamicValue(String())
     var confrimedUnspent: DynamicValue<String> = DynamicValue(String())
     
-    var searchString = DynamicValue(String())
     // MARK: - ViewModel Action Methods:
     
     func onViewLoaded() {
@@ -23,7 +22,6 @@ class MainViewModel {
     }
     
     func onSearchStringUpdated(to value: String) {
-        self.searchString.value = value
         self.fetchDataFor(address: value)
     }
     
@@ -41,17 +39,15 @@ class MainViewModel {
                 }
                 if let recieved = payload?.chainStats.fundedTxoSum {
                     let updated = Double(recieved) / 100000000
-                    //2 outputs (0.00106102 tBTC)
                     self.confrimedRecieved.value = "\(self.texCount.value) outputs (\(updated) tBTC)"
                 }
                 if let spent = payload?.chainStats.spentTxoSum, let recieved = payload?.chainStats.fundedTxoSum {
                     let updated = Double(recieved - spent) / 100000000
                     self.confrimedUnspent.value = "\(self.texCount.value) outputs (\(updated) tBTC)"
                 }
-                //self.list = payload ?? []
                 
-            case .failure(let erro):
-                print(erro)
+            case .failure(let err):
+                print(err)
             }
         }
     }
